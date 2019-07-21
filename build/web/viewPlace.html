@@ -1,0 +1,162 @@
+<%@page import="dao.PlaceDAO"%>
+<%@page import="model.Place"%>
+<%@page import="java.util.List"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@include file="checkSession.jsp" %>
+
+
+<%!
+  List<Place> myList ;
+  PlaceDAO pd=new PlaceDAO();
+  String img1,img2; 
+%>
+<!DOCTYPE html>
+<html>
+    
+    <head>
+      <title>view</title>
+        <link href="css/viewPlace.css" rel="stylesheet" type="text/css">
+          <link href="fontawesome-free-5.0.1/web-fonts-with-css/css/fontawesome-all.min.css" rel="stylesheet">        
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        </head>
+<body>
+<header>
+    
+    <div class="row1">
+        <div class="logo" style="width: 1696px">
+        <img src="img/logo1.png">
+        
+        
+        
+        
+        
+    <ul class="main-nav">
+        
+        <li><a href="">HOME</a><vertical_separator></vertical_separator></li>
+        <li><a href="">OUR SERVICES</a><vertical_separator></vertical_separator></li>
+        <li><a href="">OUR LOCATIONS</a><vertical_separator></vertical_separator></li>
+        <li><a href="">CONTACT US</a><vertical_separator></vertical_separator></li>
+        <li><a href="">ABOUT US</a><vertical_separator></vertical_separator></li>
+
+        
+        <li><a href="" class ="btn btn-half">Login</a></li>
+        <li><a href="" class="btn btn-full">Sign Up</a></li>
+    
+        
+    
+            </ul></div></div>
+
+	
+			
+    </header>
+    <section class="sc">
+  <h1>See ALL Places </h1>
+        
+        <%
+        
+        myList=pd.getAllPlaces();
+        
+     
+        %>
+        
+<table bgcolor="pink" border="5">
+       <tr><th>Image</th> 
+           <th> Name</th>
+           <th>PlaceType</th> 
+           <th>description</th>
+           <th>landmark</th>
+           <th>Customertype1</th>
+       <th>City</th>
+       <th>Details</th>
+       
+        </tr>
+        <%
+        for( Place p : myList)
+        {
+        %>
+        <tr>
+        <form method="post" action="showDetails.jsp">
+
+          <%
+          img1="placeimg/"+p.getEmailid()+Integer.toString(p.getUser().getUserid())+Integer.toString(p.getPlaceid())+p.getCount()+"1.jpg";
+     
+        img2="placeimg/"+p.getEmailid()+Integer.toString(p.getUser().getUserid())+Integer.toString(p.getPlaceid())+p.getCount()+"2.jpg";
+         
+        
+          
+         
+          
+          
+          %>  
+            
+          <td>
+              <img src="<%= img1%>" height="100" width="100">
+          </td>
+          
+          <td>
+              <input type="hidden" name="placeid" value="<%=p.getPlaceid()%>" >
+              <input type="text" value="<%=p.getPlacename()%>" readonly >
+           </td>  
+         
+            <td>
+              <input type="text" value="<%=p.getPlacetype()%>"  readonly>
+           </td>  
+           
+           <td>
+              <input type="text" value="<%=p.getDescription()%>"  readonly>
+           </td>  
+                
+           <td>
+              <input type="text" value="<%=p.getLandmark()%>"  readonly>
+           </td>  
+                
+           <td>
+              <input type="text" value="<%=p.getCustomertype1()+" end  "+p.getCustomertype2()%> "  readonly>
+           </td>  
+           
+                
+           <td>
+              <input type="text" value="<%= p.getCity()%>"  readonly>
+           </td>  
+           
+                
+           <td>
+               <input type="submit" value="Details"  readonly>
+           </td>  
+           
+            
+            
+        </form> 
+       </tr>
+        <%
+    }
+        %>
+        
+        
+</table>   
+        
+	
+	
+	
+    </section>
+    <div class="icon-bar">
+        <a  href="#"><i class="fab fa-facebook-square"></i></a> 
+  <a href="#"><i class="fab fa-linkedin"></i></a> 
+  <a href="#"><i class="fab fa-twitter-square"></i></a> 
+  <a href="#"><i class="fab fa-instagram"></i></a>
+  <a href="#"><i class="fab fa-google-plus"></i></a> 
+    </div>
+       <div class="icon-bar-left">
+  <a href="#"><i class="fas fa-home"></i></a> 
+  <a href="#"><i class="fas fa-eye"></i></a> 
+  <a href="#"><i class="far fa-hand-point-left"></i></a> 
+           <a href="#"><i class="far fa-user"></i></a>
+</div>
+   
+     <footer>
+  <p>Posted by: Jiya  & Abhishek </p>
+  <p>Contact information: <a href="mailto:rentonclick@gmail.com">
+  rent_on_click@gmail.com</a>.</p>
+</footer>
+    </body>
+</html>
